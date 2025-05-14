@@ -1,0 +1,28 @@
+class Post:
+    def __init__(self, user, content): # Changed _init_ to __init__
+        self.user = user
+        self.content = content
+        self.replies = []
+
+    def reply(self, reply_post):
+        self.replies.append(reply_post)
+
+    def display(self, indent=0):
+        print('  ' * indent + f"{self.user}: {self.content}")
+        for reply in self.replies:
+            reply.display(indent + 1)
+
+
+# Simulating a conversation
+post1 = Post("Alice", "Excited to share my new blog post!")
+reply1 = Post("Bob", "Looking forward to reading it!")
+reply2 = Post("Charlie", "Nice! Share the link?")
+reply3 = Post("Alice", "Here it is: example.com/blog")
+
+# Building the thread
+post1.reply(reply1)
+post1.reply(reply2)
+reply2.reply(reply3)
+
+# Displaying the conversation thread
+post1.display()
